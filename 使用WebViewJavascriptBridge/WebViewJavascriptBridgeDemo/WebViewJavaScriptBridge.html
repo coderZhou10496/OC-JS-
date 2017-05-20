@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  
+   </head>
+
+   <body>
+       <br>
+       
+       <p style="text-align: center">自己写的本地网页界面</p>
+       <br>
+       <br>
+       <div align="center">
+           
+           <button onclick="scanClick()">扫一扫</button>
+           
+           <br>
+           <br>
+           
+           <button onclick="shakeClick()">改变背景色</button>
+           
+       </div>
+
+     <script>
+         
+         
+       function scanClick() {
+             WebViewJavascriptBridge.callHandler('JS调用OC',{'message':'我是JS给OC的参数'},function(response){
+                                                 alert('JS得到了OC传给的数据：' + response)
+                                                 });
+         }
+     
+       function shakeClick() {
+           var params = {'r':210,'g':57,'b':53,'a':1};
+           WebViewJavascriptBridge.callHandler('changeColor',params);
+         
+        }
+       /*这段代码是固定的，必须要放到js中*/
+       function setupWebViewJavascriptBridge(callback) {
+         if (window.WebViewJavascriptBridge) { return callback(WebViewJavascriptBridge); }
+         if (window.WVJBCallbacks) { return window.WVJBCallbacks.push(callback); }
+         window.WVJBCallbacks = [callback];
+         var WVJBIframe = document.createElement('iframe');
+         WVJBIframe.style.display = 'none';
+         WVJBIframe.src = 'wvjbscheme://__BRIDGE_LOADED__';
+         document.documentElement.appendChild(WVJBIframe);
+         setTimeout(function() { document.documentElement.removeChild(WVJBIframe) }, 0)
+       }
+
+       /*在这里来注册OC调用的JS方法*/
+       setupWebViewJavascriptBridge(function(bridge) {
+
+                                    
+        /*我们在这注册一个js调用OC的方法，不带参数，且不用ObjC端反馈结果给JS*/
+        bridge.registerHandler('myOperation', function() {
+            alert('JS方法被调用');
+          })
+         /*传一个参数*/
+        bridge.registerHandler('factorial', function(data, responseCallback) {
+            responseCallback({'result': factorial(data)})
+        })
+        /*传两个参数:计算两数之和*/
+        bridge.registerHandler('calculate', function(data, responseCallback) {
+                                                          
+            responseCallback({'result': calculate(data[0],data[1])})
+          })
+                                    
+                                    
+        var factorial = function(n) {
+                                    
+            if (n < 0)
+                                    
+            return;
+                                    
+            if (n === 0)
+                                    
+            return 1;
+                                    
+            return n * factorial(n - 1)
+                                    
+        };
+        
+         var calculate = function (a, b) {
+                                    
+              return parseInt(a) + parseInt(b);
+          };
+                                    
+    })
+                                 
+   </script>
+   
+  </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  
+   </head>
+
+   <body>
+       <br>
+       
+       <p style="text-align: center">自己写的本地网页界面</p>
+       <br>
+       <br>
+       <div align="center">
+           
+           
+           <button onclick="methodA()">不传参数</button>
+           <br>
+           <br>
+           
+           <button onclick="methodB('我是参数')">传参数</button>
+           
+           <br>
+           <br>
+           
+           <button onclick="methodC('参数1','参数2')">多参数</button>
+           
+           <br>
+           <br>
+           
+           <button onclick="methodD('我是参数')">有返回</button>
+           
+           
+       </div>
+
+     <script>
+         
+         
+         var callback = function(string){
+             alert(string)
+         }
+     
+                                 
+   </script>
+
+  </body>
+</html>

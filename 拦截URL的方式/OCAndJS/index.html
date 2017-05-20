@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <br>
+
+    <p style="text-align: center">本地网页界面</p>
+    <br>
+    <div align="center">
+
+        <button onclick="scanClick()">扫一扫</button>
+        <br>
+        <br>
+        <button onclick="shakeClick()">摇一摇</button>
+
+    </div>
+    
+
+    <script>
+        function scanClick() {
+            window.location.href = "MyAction://scanClickOperation"
+            
+        }
+        function shakeClick() {
+        window.location.href = "MyAction://shakeClickOperation"
+        
+        }
+    </script>
+
+</body>
+</html>
